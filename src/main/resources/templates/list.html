@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:thth="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Город</th>
+                <th>Возраст</th>
+                <th>Роль</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${users.empty}">
+                <td colspan="2"> Пользователи не зарегистрированиы </td>
+            </tr>
+            <tr th:each="user : ${users}">
+
+                <td  th:text="${user.id}"></td>
+                <td th:text="${user.email}"></td>
+                <td  th:text="${user.password}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.surname}"></td>
+                <td th:text="${user.city}"></td>
+                <td th:text="${user.age}"></td>
+                <td>
+                    <li th:each="role : ${user.roleSet}">
+                        <span th:text="${role.rolesName}">Роль</span>
+                    </li>
+                </td>
+                <td>
+                    <a th:href="@{/admin/edit/{id}(id=${user.id})}">Изменить</a>
+                    <form action="#" th:action="@{/admin/delete/{id}(id=${user.id})}" method="get">
+                        <input type = "submit" value="удалить">
+                    </form>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+    <br>
+    <form action="#" th:action="@{/admin/add}" method="get">
+        <input type="submit" value="добавить пользователя">
+    </form>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Выйти"/>
+    </form>
+</body>
+</html>

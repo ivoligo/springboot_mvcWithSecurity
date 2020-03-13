@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение пользователя</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/admin/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <input type="hidden" name="id" th:field = "*{id}"/>
+    <table>
+        <tr>
+            <td><label>Имя</label></td>
+            <td><input required type="text" name="name" th:field="*{name}"></td>
+        </tr>
+
+        <tr>
+            <td><label>Фамилия</label></td>
+            <td><input required type="text" name="surname" th:field="*{surname}"></td>
+        </tr>
+
+        <tr>
+            <td>email/login</td>
+            <td><input required type="email" name="email"  th:field="*{email}" placeholder="email, она же логин"></td>
+        </tr>
+
+        <tr>
+            <td>Пароль</td>
+            <td><input required type="password" name="password" th:field="*{password}"></td>
+        </tr>
+
+        <tr>
+            <td>Город</td>
+            <td><input required type="text" name="city"  th:field="*{city}"></td>
+        </tr>
+
+        <tr>
+            <td>Возраст</td>
+            <td><input required type="number" name="age"  th:field="*{age}"/></td>
+        </tr>
+
+        <tr>
+            <td>Роли </td>
+            <td >
+                <select required name = "roleSet" multiple >
+                        <option th:each  = "role : ${user.roleSet}" style="color:#ff00ff" th:text="${role.rolesName}" >
+                        </option>
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                    <option value="otherUser">otherUser</option>
+                    <option value="webUser">webUser</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr></tr>
+        <tr>
+            <td colspan="2" align="center" ><input type="submit" value="применить"> </td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+</body>
+</html>
