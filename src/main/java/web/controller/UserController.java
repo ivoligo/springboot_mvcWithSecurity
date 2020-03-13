@@ -11,7 +11,6 @@ import web.model.User;
 
 @Controller
 @RequestMapping("/user")
-@PreAuthorize("hasAuthority('user')")
 public class UserController {
 
     @GetMapping

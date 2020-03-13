@@ -16,7 +16,6 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
-@PreAuthorize("hasAuthority('admin')")
 public class AdminController {
     private UserService userService;
     private RoleService roleService;
